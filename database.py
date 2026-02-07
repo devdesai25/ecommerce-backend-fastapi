@@ -1,7 +1,9 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from config import settings
 
-engine  = create_engine( settings.database_url, connect_args= {"check_same_thread":False} )
-Base = DeclarativeBase()
+metadata = MetaData()
+engine  = create_engine( settings.database_url)
+class Base(DeclarativeBase):
+    pass
 sessionlocal = sessionmaker(bind = engine, autocommit=False, autoflush=False)

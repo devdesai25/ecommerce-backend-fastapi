@@ -1,4 +1,2 @@
 from fastapi import FastAPI
-
-def login(username: str, password: str):
-    return 
+from database import sessionlocal

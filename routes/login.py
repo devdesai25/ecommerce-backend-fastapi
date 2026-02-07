@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from services import login_service
-router = FastAPI()
+from schemas.login_signup import userlogin
+router = APIRouter(
+    tags=["Auth"]
+)
 
-router.post("/login")
-def login(username: str, password:str):
-    return login_service.login(username, password)
+@router.get("/login")
+def login():
+    return {"message" : "Received"}
