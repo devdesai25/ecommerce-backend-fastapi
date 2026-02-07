@@ -5,6 +5,7 @@ router = APIRouter(
     tags=["Auth"]
 )
 
-@router.get("/login")
-def login():
-    return {"message" : "Received"}
+@router.post("/login")
+def login(user:userlogin):
+
+    return login_service.login(user)

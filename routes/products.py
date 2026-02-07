@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from services import product_service
-router = FastAPI()
 
-router.post("/products")
+router = APIRouter(
+    tags=["Products"]
+)
+
+@router.get("/")
 def products():
-
-    return product_service
+    return {"message" : "This is home page"}

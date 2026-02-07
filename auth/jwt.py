@@ -2,7 +2,7 @@ from passlib.context import CryptContext
 from jose import jwt,JWTError
 from datetime import timedelta, datetime
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated=False)
+pwd_context = CryptContext(schemes=["bcrypt_sha256","bcrypt"], deprecated="auto")
 #move this later to .env
 SECRET_KEY = "SECRET"
 SECRET_ALGORITHM = "HS256"
