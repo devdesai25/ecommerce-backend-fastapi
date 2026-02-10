@@ -13,7 +13,7 @@ def hash_password(password:str):
     return hashed_password
 
 def verify(hash_password:str, plain_password:str):
-    plain_password = pwd_context.verify(plain_password,hash_password)
+    plain_password = pwd_context.verify(plain_password, hash_password)
     return plain_password
 
 def encode(data):
