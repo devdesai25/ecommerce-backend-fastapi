@@ -6,14 +6,20 @@ from auth.jwt import verify,encode,hash_password
 def login(user):
     with sessionlocal() as db:
   #      try:
-            isValid = db.query(User).filter(User.username == user.username).first()
-            if not isValid:
-                raise HTTPException(status_code=404,detail="Invalid Password or Username")
-            hashed_password = hash_password(user.password)
-            isValid = db.query(User).filter(User.hashed_password == hashed_password)
-            if not isValid:
-                raise HTTPException(status_code=404,detail="Invalid Password Or Username")
-            auth_code = encode(user)
+            db_user = db.query(User).filter(User.username == user.username).first()
+            if not db_user:
+                raise HTTPException(
+                    status_code=404,
+                    detail="Invalid Password or Username"
+                    )
+            
+            if not verify(user.password, db_user.hashed_password):
+                raise HTTPException(
+                    status_code=404,
+                    detail="Invalid Password Or Username"
+                    )
+            user_id = db_user.id 
+            auth_code = encode({"sub":user_id,"username":db_user.username})
             db.close()
  #       except:
 #            raise HTTPException(status_code=500,detail="Some error")
