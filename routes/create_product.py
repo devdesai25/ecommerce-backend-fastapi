@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from services.add_product import add
+from services.product_service import productadd
 
 router = APIRouter(
     prefix="/admin",
@@ -7,6 +7,6 @@ router = APIRouter(
 )
 
 @router.post("/product")
-def create_product(product : add = Depends()):
+def create_product(product : productadd = Depends()):
     print("Success")
     return product

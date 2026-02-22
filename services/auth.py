@@ -2,7 +2,7 @@ from auth.jwt import decode, oauth2scheme
 from fastapi import Depends, HTTPException
 from database import get_db
 from models.users import User
-from schemas.login_signup import userlogin
+from schemas.users import UserLogin
 
 def get_current_user(token = Depends(oauth2scheme), db = Depends(get_db)):
     payload = decode(token)
@@ -14,3 +14,10 @@ def get_current_user(token = Depends(oauth2scheme), db = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     
     return user
+
+def req_admin(admin : get_current_user = Depends()):
+
+    if not admin.role == 'admin':
+        raise HTTPException(401, detail= " Unauthorized access")
+    
+    return admin

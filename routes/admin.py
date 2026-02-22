@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from services.protected_service import get_current_user
+from services.auth import get_current_user
 router = APIRouter( 
     tags=["admin"]
 )

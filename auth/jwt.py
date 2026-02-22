@@ -4,12 +4,9 @@ import json
 from datetime import timedelta, datetime
 from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
+from config import settings
 
 pwd_context = CryptContext(schemes=["bcrypt_sha256","bcrypt"], deprecated="auto")
-#move this later to .env
-SECRET_KEY = "SECRET"
-SECRET_ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 def hash_password(password:str):
     hashed_password = pwd_context.hash(password)
@@ -22,15 +19,15 @@ def verify(plain_password:str,hash_password:str):
 def encode(data:dict):
     assert isinstance(data,dict)    
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.utcnow() + timedelta(minutes= settings.access_token_expire_minutes)
     to_encode.update({"exp":expire})
 
-    encoded = jwt.encode(to_encode , SECRET_KEY,algorithm= SECRET_ALGORITHM)
+    encoded = jwt.encode(to_encode , settings.secret_key, algorithm= settings.secret_algorithm)
     return encoded
 
 def decode(data):
     try:
-        payload = jwt.decode(data, SECRET_KEY,algorithms=[SECRET_ALGORITHM])
+        payload = jwt.decode(data, settings.secret_key,algorithms=[settings.secret_algorithm])
         return payload
     except JWTError as e:
         print("JWT ERROR",e)

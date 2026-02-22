@@ -1,6 +1,8 @@
 from .login import router as login_router
-from .products import router as product_router
+from .get_products import router as get_products_router
 from .signup import router as signup_router
 from .me import router as me_router
 from .admin import router as admin_router
 from .create_product import router as create_product_router
+from .delete_product import router as delete_product_router
+from .update_product import router as update_product_router
