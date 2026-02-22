@@ -1,6 +1,34 @@
-#virtual enviornments
-.env
+# Virtual environments
 venv/
+.env
 
-#python cache
+# Python bytecode
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# SQLite database
+*.db
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Temporary files
+tempCodeRunnerFile.py
