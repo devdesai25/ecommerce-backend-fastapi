@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import Home from './pages/Home'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import Admin from './pages/Admin'
 import axios from "axios"
 
 function App() {
@@ -11,11 +16,15 @@ function App() {
   },[]);
 
   return (
-    <div>
-    <h1>
-      {message}
-    </h1>
-    </div>  )
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/Admin' element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App

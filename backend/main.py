@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from config import settings
 from database import engine, Base, metadata
-from routes import login_router, get_products_router, signup_router, me_router, admin_router, create_product_router, delete_product_router, update_product_router
+from routes import login_router, get_products_router, signup_router, me_router, admin_router, create_product_router, delete_product_router, update_product_router, route
 
 Base.metadata.create_all(bind=engine)
 
@@ -15,3 +15,4 @@ app.include_router(admin_router)
 app.include_router(create_product_router)
 app.include_router(delete_product_router)
 app.include_router(update_product_router)
+app.include_router(route)
