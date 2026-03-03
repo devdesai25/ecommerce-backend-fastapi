@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate} from 'react-router-dom'
 
 function Login(){
 
+    const navigate = useNavigate();
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
 
@@ -22,6 +24,7 @@ function Login(){
         console.log(data)
 
         localStorage.setItem("token", data.access_token);
+        navigate("/");
 
     };
 

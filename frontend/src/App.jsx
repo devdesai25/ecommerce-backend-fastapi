@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Admin from './pages/Admin'
+import Navbar from './components/Navbar'
 import axios from "axios"
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
