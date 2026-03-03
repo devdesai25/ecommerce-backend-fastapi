@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate} from 'react-router-dom'
 
-function Login(){
+function Login({setIsLoggedIn}){
 
     const navigate = useNavigate();
     const[username, setUsername] = useState("");
@@ -24,6 +24,7 @@ function Login(){
         console.log(data)
 
         localStorage.setItem("token", data.access_token);
+        setIsLoggedIn=true;
         navigate("/");
 
     };

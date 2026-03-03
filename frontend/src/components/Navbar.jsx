@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom"
 
-function Navbar() {
+function Navbar({isLoggedIn, setIsLoggedIn}) {
     const token = localStorage.getItem("token");
 
     return(
         <nav>
             <Link to="/" >Home</Link>
 
-            {!token && (
+            {!isLoggedIn && (
                 <>
                     < Link to="/signup">Signup</Link>
                     < Link to="/login">Login</Link>
                 </>
             )}
 
-            {token && (
+            {isLoggedIn && (
                 <>
                     < Link to="/admin">Admin</Link>
                     

@@ -9,6 +9,7 @@ import axios from "axios"
 
 function App() {
   const [message, setMessage] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/")
@@ -18,10 +19,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Navbar />
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedin={setIsLoggedIn} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login setIsLoggedin={setIsLoggedIn} />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/Admin' element={<Admin />} />
       </Routes>
