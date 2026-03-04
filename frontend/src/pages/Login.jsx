@@ -24,7 +24,7 @@ function Login({setIsLoggedIn}){
         console.log(data)
 
         localStorage.setItem("token", data.access_token);
-        setIsLoggedIn=true;
+        setIsLoggedIn(true);
         navigate("/");
 
     };
