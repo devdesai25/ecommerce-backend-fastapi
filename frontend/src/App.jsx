@@ -19,10 +19,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Navbar isLoggedIn={isLoggedIn} setIsLoggedin={setIsLoggedIn} />
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login setIsLoggedin={setIsLoggedIn} />} />
+        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/Admin' element={<Admin />} />
       </Routes>
