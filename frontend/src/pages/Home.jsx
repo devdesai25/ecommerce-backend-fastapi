@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-
+import "./Home.css"
 function Home(){
     
     const [products, setProduct] = useState([])
@@ -17,14 +17,16 @@ function Home(){
 
 }, []);
     
-    return (<div>
+    return (<div className="product-grid">
         {products.map( product =>(
-            <div>
+            <div className="card" key={product.id}>
                 <h3>{product.name}</h3>
-                <h3>{product.price}</h3>
-                <h3>{product.description}</h3>
-                <br></br>
-                <br></br>
+                <p className="price">
+                {product.price}
+                </p>
+                <p className="description">
+                {product.description}
+                </p>
             </div>
         ))}
     </div>)
