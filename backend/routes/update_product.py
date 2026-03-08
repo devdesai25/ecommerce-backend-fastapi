@@ -16,14 +16,12 @@ def update_product( id : int ,cur_update : ProductUpdate, admin: req_admin = Dep
     if not db_product:
         raise HTTPException(404,detail="Product Not Found")
 
-    db_product.name = cur_update.name 
-    db_product.description = cur_update.description
-    db_product.price = cur_update.price 
-    db_product.stock = cur_update.stock
+    update_data = cur_update.dict(exclude_unset=True)
+
+    for key, value in update_data.items():
+        setattr(db_product,key,value)
 
     db.commit()
     db.refresh(db_product)
-    
-    db_product = db.query(product).filter(product.product_id == id).first()
     
     return db_product
