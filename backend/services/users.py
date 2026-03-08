@@ -9,16 +9,22 @@ def signup_service(user, db):
     if db_user:
         raise HTTPException(status_code=404,detail="Username already there")
     hashed_pass = hash_password(user.password)
-    db_user = User(username = user.username, hashed_password = hashed_pass, role="admin")
+    db_user = User(username = user.username, hashed_password = hashed_pass)
 
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     token = {"sub":db_user.id,"username":db_user.username}
 
-    auth_key = encode(token)
+    access_token = encode(token)
 
-    return (auth_key,{"User":"Logged in"})
+    return ({"access_token":access_token,
+             "token_type":"bearer",
+             "user":{
+                "id" : db_user.id,
+                "username": db_user.username,
+                "role": db_user.role }
+        })
 
 
 def login_service(user,db):

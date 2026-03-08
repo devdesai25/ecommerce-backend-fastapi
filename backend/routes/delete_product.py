@@ -7,10 +7,10 @@ router = APIRouter(
     tags=["delete"]
 )
 
-@router.delete("/prdouct/{id}")
-def delete_prod(admin : req_admin = Depends(), db : get_db = Depends(),prod_id : int = id ):
+@router.delete("/delete/{id}")
+def delete_prod(id : int,admin : req_admin = Depends(), db : get_db = Depends()):
     
-    prod = db.query(product).filter(product.product_id == prod_id).first()
+    prod = db.query(product).filter(product.product_id == id).first()
 
     if not product:
         raise HTTPException(404, detail="Product Not Found")

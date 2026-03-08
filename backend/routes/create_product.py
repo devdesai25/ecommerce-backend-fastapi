@@ -6,7 +6,7 @@ router = APIRouter(
     tags=["Create"]
 )
 
-@router.post("/product")
+@router.post("/create")
 def create_product(product : productadd = Depends()):
     print("Success")
     return product
