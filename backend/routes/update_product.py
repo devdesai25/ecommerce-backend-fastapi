@@ -9,9 +9,9 @@ router = APIRouter(
 )
 
 @router.patch("/update/{id}")
-def update_product( cur_update : ProductUpdate, cur_product_id : int = id, admin: req_admin = Depends(), db : get_db = Depends()):
+def update_product( id : int ,cur_update : ProductUpdate, admin: req_admin = Depends(), db : get_db = Depends()):
     
-    db_product = db.query(product).filter(product.product_id == cur_product_id).first()
+    db_product = db.query(product).filter(product.product_id == id).first()
     
     if not db_product:
         raise HTTPException(404,detail="Product Not Found")
@@ -24,6 +24,6 @@ def update_product( cur_update : ProductUpdate, cur_product_id : int = id, admin
     db.commit()
     db.refresh(db_product)
     
-    db_product = db.query(product).filter(product.product_id == cur_product_id).first()
+    db_product = db.query(product).filter(product.product_id == id).first()
     
     return db_product
