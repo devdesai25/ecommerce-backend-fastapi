@@ -1,10 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext";
 
-function Navbar({isLoggedIn, setIsLoggedIn}) {
+function Navbar() {
 
     const token = localStorage.getItem("token");
-    
-    console.log("Navbar render", isLoggedIn)
+    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
     return(
         <nav>
             <Link to="/" >Home</Link>
