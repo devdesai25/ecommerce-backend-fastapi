@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate} from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext";
 
-function Login({setIsLoggedIn}){
+function Login(){
 
     const navigate = useNavigate();
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
-
+    const {setIsLoggedIn} = useContext(AuthContext)
+    
     const handleLogin = async () => {
         const formData = new URLSearchParams();
         formData.append("username", username);
