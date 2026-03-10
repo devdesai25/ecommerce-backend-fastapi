@@ -7,6 +7,7 @@ import Admin from './pages/Admin'
 import Navbar from './components/Navbar'
 import axios from "axios"
 import AuthContext from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   const [message, setMessage] = useState("")
@@ -24,7 +25,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/Admin' element={<Admin />} />
+        <Route path='/Admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

@@ -4,18 +4,21 @@ function Home(){
     
     const [products, setProduct] = useState([])
 
-    useEffect(()=>{
-        const fetchProducts = async () => {
-        try{    const res = await fetch("http://localhost:8000/products");
+    const fetchProducts = async () => {
+        try{    
+            const res = await fetch("http://localhost:8000/products");
             const data = await res.json();
             setProduct(data);
         }catch(error){
             console.log("Error fetching products",error)
         }
     };
-    fetchProducts()
 
-}, []);
+    useEffect(()=>{
+    
+        fetchProducts()
+
+    }, []);
     
     return (<div className="product-grid">
         {products.map( product =>(
