@@ -1,19 +1,7 @@
-import { useState } from "react"
+import { useState } from "react";
+import api from "../services/api";
 
 function Admin() {
-
-//    if(!token){
-//        return <h2>Not Authorized my man</h2>
-//    }
-//    return (<h2>Authorized</h2>)
-
-//    const user = JSON.stringify(localStorage.getItem("user"))
-//    if(user.role!=="admin"){
-//        return (<div>
-//            <h2>Not Authorized</h2>
-//        </div>)
-//    }
-
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -24,64 +12,41 @@ function Admin() {
 
         const handleCreate = async () => {
 
-            const token = localStorage.getItem("token")
-
-            
-            await fetch("http://localhost:8000/admin/create",{
-                method : "POST",
-
-                headers : {
-                    "Content-Type" : "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body : JSON.stringify({
+            await api.post(
+                "/admin/create",
+                JSON.stringify({
                     name,
                     price : Number(price),
                     description,
                     stock : Number(stock)
                 })
-            });
-
+            );
+        
         };    
 
         const handleDelete = async () => {
 
-            const token = localStorage.getItem("token")
+            api.delete(
+                `/admin/delete/${deleteId}`
+            );
 
-            await fetch(`http://localhost:8000/admin/delete/${deleteId}`,{
-                
-                method: "DELETE",
-
-                headers : {
-                    "Authorization" : `Bearer ${token}`
-                }
-            });
         };
 
         const handleUpdate = async () => {
  
-            const token = localStorage.getItem("token")
+            const updateData = {};
 
-            const updateData = {}
+            if(name) updateData.name = name;
+            if(description) updateData.description = description;
+            if(price) updateData.price = Number(price);
+            if(stock) updateData.stock = Number(stock);
 
-            if(name) updateData.name = name
-            if(description) updateData.description = description
-            if(price) updateData.price = Number(price)
-            if(stock) updateData.stock = Number(stock)
-
-
-            await fetch(`http://localhost:8000/admin/update/${updateId}`,{
-
-                method : "PATCH",
-
-                headers : {
-                    "Authorization" : `Bearer ${token}`,
-                    "Content-Type" : "application/json" 
-                },
-                body : JSON.stringify(updateData)
-            })
+            api.patch(
+                `/admin/update/${updateId}`,
+                JSON.stringify(updateData)
+            );
+ 
         };
-
 
     return (
         <div>
@@ -172,4 +137,5 @@ function Admin() {
         </div>
     )
 };
+
 export default Admin
