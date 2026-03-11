@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react"
 import "./Home.css"
+import api from "../services/api";
+
 function Home(){
     
     const [products, setProduct] = useState([])
 
     const fetchProducts = async () => {
-        try{    
-            const res = await fetch("http://localhost:8000/products");
-            const data = await res.json();
-            setProduct(data);
+        try{
+            const res = await api.get("/products")    
+            setProduct(res.data);
         }catch(error){
             console.log("Error fetching products",error)
         }
@@ -21,14 +22,14 @@ function Home(){
     }, []);
     
     return (<div className="product-grid">
-        {products.map( product =>(
-            <div className="card" key={product.id}>
-                <h3>{product.name}</h3>
+        {products.map(product => (
+            <div key={product.product_id} className="card">
+                    <h3>{product.name}</h3>
                 <p className="price">
-                {product.price}
+                    {product.price}
                 </p>
                 <p className="description">
-                {product.description}
+                    {product.description}
                 </p>
             </div>
         ))}
