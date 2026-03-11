@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../services/api";
 
 function Signup(){
    
@@ -7,21 +8,13 @@ function Signup(){
 
     const handleSubmit = async() => {
 
-        const res = await fetch("http://localhost:8000/signup",{
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json",
-            },
-            body : JSON.stringify({
+        const res = await api.post(
+            "/signup",
+            JSON.stringify({
                 username : username,
-                password : password
+                password: password
             })
-
-        });
-
-        const data = await res.json()
-
-        console.log(data)
+        );
     }
     
     return (<div>
