@@ -3,6 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from services.users import login_service
 from schemas.users import UserLogin,UserResponse
 from database import get_db
+
 router = APIRouter(
     tags=["Auth"]
 )

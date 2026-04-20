@@ -19,15 +19,15 @@ def verify(plain_password:str,hash_password:str):
 def encode(data:dict):
     assert isinstance(data,dict)    
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes= settings.access_token_expire_minutes)
+    expire = datetime.utcnow() + timedelta(minutes= settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp":expire})
 
-    encoded = jwt.encode(to_encode , settings.secret_key, algorithm= settings.secret_algorithm)
+    encoded = jwt.encode(to_encode , settings.SECRET_KEY, algorithm= settings.SECRET_ALGORITHM)
     return encoded
 
 def decode(data):
     try:
-        payload = jwt.decode(data, settings.secret_key,algorithms=[settings.secret_algorithm])
+        payload = jwt.decode(data, settings.SECRET_KEY,algorithms=[settings.SECRET_ALGORITHM])
         return payload
     except JWTError as e:
         print("JWT ERROR",e)
