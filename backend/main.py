@@ -1,4 +1,3 @@
-"""
 from fastapi import FastAPI
 from config import settings
 from database import engine, Base, metadata
@@ -38,4 +37,4 @@ app = FastAPI()
 def root():
     return {"status": "working"}
 
-handler = Mangum(app)
+handler = Mangum(app)"""
