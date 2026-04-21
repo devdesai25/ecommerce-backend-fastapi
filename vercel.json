@@ -1,7 +1,7 @@
 {
     "builds": [
         {
-        "src": "ecommerce-backend-fastapi/backend/main.py",
+        "src": "/main.py",
         "use": "@vercel/python"    
         }
     ]
