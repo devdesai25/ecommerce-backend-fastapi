@@ -1,3 +1,4 @@
+"""
 from fastapi import FastAPI
 from config import settings
 from database import engine, Base, metadata
@@ -25,5 +26,16 @@ app.include_router(create_product_router)
 app.include_router(delete_product_router)
 app.include_router(update_product_router)
 app.include_router(route)
+
+handler = Mangum(app)
+"""
+from fastapi import FastAPI
+from mangum import Mangum
+
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"status": "working"}
 
 handler = Mangum(app)
