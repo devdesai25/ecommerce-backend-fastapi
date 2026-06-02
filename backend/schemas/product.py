@@ -6,7 +6,7 @@ class ProductResponse(BaseModel):
     name : str
     description: str
     price : float
-
+    images: str | None = None
     class config:
         orm_mode = True
 
@@ -15,10 +15,11 @@ class ProductUpdate(BaseModel):
     description : Optional[str] = None
     stock : Optional[int] = None
     price : Optional[float] = None
-
+    images: str | None = None
 class ProductCreate(BaseModel):
 
     name : str
     description : str | None = None
     stock : int
     price : float 
+    images: str | None = None
