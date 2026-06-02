@@ -22,7 +22,8 @@ def productadd(cur_product, admin,db):
         description = cur_product.description, 
         price = cur_product.price, 
         stock = cur_product.stock, 
-        created_by = admin.id
+        created_by = admin.id,
+        images = cur_product.images
     ) 
     
     try:
@@ -37,13 +38,6 @@ def productadd(cur_product, admin,db):
             409,
             detail="Database Integrity Error"
         )
-    
-    except Exception:
-        db.rollback()
-
-        raise HTTPException(
-            500,
-            detail="Internal Server Error")
     
     return add_prod
 
@@ -69,14 +63,6 @@ def productDelete(id: int, db):
         raise HTTPException(
             status_code=409,
             detail="Database Integrity Error"
-        )
-    
-    except Exception:
-        db.rollback()
-
-        raise HTTPException(
-            status_code=500,
-            detail="Internal Server Error"
         )
     
     return {
@@ -113,14 +99,6 @@ def productUpdate(id: int, update_product, db):
         raise HTTPException(
             status_code=409,
             detail="Database Integrity Error"
-        )
-    
-    except Exception:
-        db.rollback()
-
-        raise HTTPException(
-            status_code=500,
-            detail="Internal Server Error"
         )
     
     return {
