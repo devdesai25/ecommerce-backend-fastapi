@@ -15,14 +15,13 @@ function Login(){
         formData.append("username", username);
         formData.append("password", password);
 
-        const res = api.post("/login",formData,{headers:{
+        const res = await api.post("/login",formData,{headers:{
             "Content-Type": "application/x-www-form-urlencoded"
         }})
 
-        console.log(res)
-
-        localStorage.setItem("token", res.access_token);
-        localStorage.setItem("role",JSON.stringify(res.user));
+        localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("role", JSON.stringify(res.data.user));
+        console.log(res.data.access_token)
         setIsLoggedIn(true);
         navigate("/");
 
