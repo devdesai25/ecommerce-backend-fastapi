@@ -23,3 +23,4 @@ class Product(Base):
     images = Column(String, nullable= False)
 
     cart_items = relationship("CartItem", back_populates="product")
+    order_items = relationship("OrderItem", back_populates="product", cascade="all, delete-orphan")
